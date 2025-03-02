@@ -7,6 +7,9 @@ config :elixir_mock_test_demo, ElixirMockTestDemoWeb.Endpoint,
   secret_key_base: "rLwEXtLHE5dc7tlg/MbWrjmRXJN5ieaH/vb55xbqDPGgWIAT/9InYQ7fX50qvpIR",
   server: false
 
+config :elixir_mock_test_demo,
+  weather_service: ElixirMockTestDemo.WeatherMock
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
