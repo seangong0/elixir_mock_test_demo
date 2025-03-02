@@ -1,9 +1,14 @@
 defmodule ElixirMockTestDemo.Weather do
+  @callback get_forecast(city :: String.t()) :: {:ok, map()} | {:error, :api_error}
+
   require Logger
+
+  @behaviour ElixirMockTestDemo.Weather
+
   @weather_uri "https://api.seniverse.com/v3/weather/now.json"
   @ttl 300
 
-  @spec get_forecast(String.t()) :: {:ok, map()} | {:error, :api_error}
+  @impl ElixirMockTestDemo.Weather
   def get_forecast(city) do
     timestamp = DateTime.utc_now() |> DateTime.to_unix()
     query = %{ts: timestamp, ttl: @ttl, uid: public_key(), sig: create_sig(), location: city}
@@ -11,6 +16,9 @@ defmodule ElixirMockTestDemo.Weather do
     case Req.post(@weather_uri, params: query) do
       {:ok, %Req.Response{status: 200, body: body}} ->
         {:ok, body["results"] |> hd() |> then(fn x -> x["now"] end)}
+
+      {:ok, %Req.Response{status: 404}} ->
+        {:error, :city_not_found}
 
       error ->
         Logger.error("get forecast error: #{inspect(error)}")
