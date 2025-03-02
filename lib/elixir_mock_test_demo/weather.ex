@@ -1,5 +1,6 @@
 defmodule ElixirMockTestDemo.Weather do
-  @callback get_forecast(city :: String.t()) :: {:ok, map()} | {:error, :api_error}
+  @callback get_forecast(city :: String.t()) ::
+              {:ok, map()} | {:error, :api_error | :city_not_found}
 
   require Logger
 

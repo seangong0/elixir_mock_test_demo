@@ -21,7 +21,7 @@ defmodule ElixirMockTestDemoWeb.WeatherControllerTest do
     test "city not found", %{conn: conn} do
       WeatherMock
       |> expect(:get_forecast, fn "beijing1" ->
-        {:error, %Req.Response{status: 404}}
+        {:error, :city_not_found}
       end)
 
       conn = get(conn, ~p"/api/weather/beijing1")
