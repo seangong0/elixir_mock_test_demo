@@ -7,5 +7,7 @@ defmodule ElixirMockTestDemoWeb.Router do
 
   scope "/api", ElixirMockTestDemoWeb do
     pipe_through :api
+
+    get "/weather/:city", WeatherController, :show
   end
 end
