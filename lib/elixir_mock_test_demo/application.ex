@@ -9,7 +9,8 @@ defmodule ElixirMockTestDemo.Application do
   def start(_type, _args) do
     children = [
       ElixirMockTestDemoWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:elixir_mock_test_demo, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:elixir_mock_test_demo, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ElixirMockTestDemo.PubSub},
       # Start a worker by calling: ElixirMockTestDemo.Worker.start_link(arg)
       # {ElixirMockTestDemo.Worker, arg},

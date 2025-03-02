@@ -2,7 +2,9 @@ defmodule ElixirMockTestDemoWeb.ErrorJSONTest do
   use ElixirMockTestDemoWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert ElixirMockTestDemoWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert ElixirMockTestDemoWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do
