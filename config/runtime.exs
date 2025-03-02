@@ -1,5 +1,16 @@
 import Config
 
+if config_env() not in [:test] do
+  import Dotenvy
+
+  env_dir_prefix = System.get_env("RELEASE_ROOT") || Path.expand("./")
+  source!([Path.absname(".env", env_dir_prefix), System.get_env()])
+
+  config :elixir_mock_test_demo, :seniverse,
+    public_key: env!("SENIVERSE_PUBLIC_KEY", :string!),
+    private_key: env!("SENIVERSE_PRIVATE_KEY", :string!)
+end
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
