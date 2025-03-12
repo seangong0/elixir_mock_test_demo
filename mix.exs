@@ -42,7 +42,7 @@ defmodule ElixirMockTestDemo.MixProject do
       {:req, "~> 0.5.8"},
       {:dotenvy, "~> 1.0.1"},
       {:goal, "~> 1.2.0"},
-      {:hammox, "~> 0.6.0"}
+      {:hammox, "~> 0.6.0", only: :test}
     ]
   end
 
